@@ -69,7 +69,12 @@ document.addEventListener('keydown', (e) => {
     totalTyped += e.key;
     currentCharIndex++;
   }
-
+  
   // Test keyboard handling
   console.log('e.key', e.key, 'totalTyped', totalTyped, 'currentCharIndex', currentCharIndex);
+
+  const textArray = longText.split('');
+  // Test text array handling
+  console.log('textArray', textArray);
+
 });
