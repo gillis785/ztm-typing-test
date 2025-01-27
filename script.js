@@ -74,7 +74,24 @@ document.addEventListener('keydown', (e) => {
   console.log('e.key', e.key, 'totalTyped', totalTyped, 'currentCharIndex', currentCharIndex);
 
   const textArray = longText.split('');
-  // Test text array handling
-  console.log('textArray', textArray);
+  textContainer.innerText = '';  // Clear the existing content of textContainer
+
+  errors = 0;  // Reset errors count for this typing session
+
+  for (let i = 0; i < textArray.length; i++) {
+    const span = document.createElement('span');
+
+    if (i < totalTyped.length) {
+      if (totalTyped[i] === textArray[i]) {
+        span.classList.add('correct');
+      } else {
+        span.classList.add('error');
+        errors++;
+      }
+    }
+
+    span.textContent = textArray[i];
+    textContainer.appendChild(span);  // Append each span element to the textContainer
+  }
 
 });
