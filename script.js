@@ -32,6 +32,12 @@ const timerElement = document.getElementById('timer');
 const tryAgainButton = document.getElementById('try-again');
 const finalScoreElement = document.getElementById('final-score');
 
+let totalTyped = '';
+let currentCharIndex = 0;
+let errors = 0;
+let longText = generateLongText();
+
+
 // Shuffle words array
 
 function shuffleArray(array) {
@@ -42,9 +48,6 @@ function shuffleArray(array) {
   return array;
 }
 
-// Test Shuffle words
-//console.log(shuffleArray(words));
-
 // Combine shuffled words into one long string with spaces
 
 function generateLongText() {
@@ -53,21 +56,20 @@ function generateLongText() {
   return longText;
 }
 
-// Test combineWords
+// Handle typing over displayed text and scroll
 
-let longText = generateLongText();
+document.addEventListener('keydown', (e) => {
 
-textContainer.textContent = longText;
+  if (e.key === 'Backspace') {
+    if (totalTyped.length > 0) {
+      currentCharIndex = Math.max(currentCharIndex - 1, 0);
+      totalTyped = totalTyped.slice(0, -1);
+    }
+  } else if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+    totalTyped += e.key;
+    currentCharIndex++;
+  }
 
-//console.log(longText);
-
-// or
-
-/* function combineWords(words) {
-  return words.join(" ");
-}
-
-// Test combinedWords
-
-let longText = combineWords(words);
-console.log(longText); */
+  // Test keyboard handling
+  console.log('e.key', e.key, 'totalTyped', totalTyped, 'currentCharIndex', currentCharIndex);
+});
